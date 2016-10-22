@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+    <ui:composition template="/tmpl/tmpl.xhtml">
+        <ui:define name="body">
+
+
+            <h:form>
+                <h2><h:outputText value="#{msgs.TitleLineCharts}"/></h2>
+                <ul>
+                    <li><h:outputLink value="charts/Line/Basic.jsf" >#{msgs.LineChartsBasic}</h:outputLink></li>
+                    <li><h:outputLink value="" ></h:outputLink></li>
+                </ul>
+
+                <br />
+                <br />
+                <h2><h:outputText value="#{msgs.TitlePieCharts}"/></h2>
+                <ul>
+                    <li><h:outputLink value="charts/Pie/Basic.jsf" >#{msgs.PieChartsBasic}</h:outputLink></li>
+                    <li><h:outputLink value="" ></h:outputLink></li>
+                </ul>
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

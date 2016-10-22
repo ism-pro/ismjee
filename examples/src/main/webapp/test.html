@@ -1,0 +1,123 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" id="html"><head id="j_idt2">
+        <title>ismjee</title><link type="text/css" rel="stylesheet" href="/examples/javax.faces.resource/w3/w3.min.css.jsf?ln=css" /><link type="text/css" rel="stylesheet" href="/examples/javax.faces.resource/w3/font-awesome.min.css.jsf?ln=css" /><link type="text/css" rel="stylesheet" href="/examples/javax.faces.resource/style.min.css.jsf?ln=css" /></head><body class="w3-light-grey">
+
+        <!-- Top container -->
+        <div class="w3-container w3-top w3-black w3-large w3-padding" style="z-index:4">
+            <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey w3-left" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+            <div class="w3-center">**ISMJEE Component Examples - Highcharts</div>           
+        </div>
+
+        <!-- Sidenav/menu -->
+        <nav class="w3-sidenav w3-collapse w3-pink w3-animate-left" style="z-index:3; width:300px;" id="mySidenav">
+            <br />
+            <div class="w3-container w3-row">
+                <div class="w3-col s4">
+                    <img src="/w3images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px" />
+                </div>
+                <div class="w3-col s6">
+                    <h6>ISMJEE</h6>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="w3-container">
+                <h5>MENU</h5>
+            </div>
+
+
+            <a href="/examples/home.jsf" class="w3-padding"><i class="fa fa-home fa-fw"></i>  Acceuil</a>
+
+
+            <div class="w3-accordion">
+                <a id="myBtnLineChart" class="w3-padding" onclick="myFunc('chartLineSub')" href="javascript:void(0)"><i class="fa fa-chain fa-fw"></i>  Line Chart<i class="w3-padding fa fa-caret-down"></i></a>
+                <div id="chartLineSub" class="w3-accordion-content w3-animate-left">
+                    <a href="/examples/charts/Line/Basic.jsf" class="w3-border-bottom test w3-hover-red">Basic line</a>
+                    <a href="javascript:void(0)" class="w3-padding w3-border-bottom test w3-hover-red">Ajax loaded data, clickable points</a>
+                    <a href="javascript:void(0)" class="w3-padding w3-border-bottom test w3-hover-red">With data labels</a>
+                    <a href="javascript:void(0)" class="w3-padding w3-border-bottom test w3-hover-red">Time series, zoomable</a>
+                </div>
+            </div>
+
+            <div class="w3-accordion">
+                <a id="myBtnPieChart" class="w3-padding" onclick="myFunc('chartPieSub')" href="javascript:void(0)"><i class="fa fa-chain fa-fw"></i>  Pie Chart<i class="w3-padding fa fa-caret-down"></i></a>
+                <div id="chartPieSub" class="w3-accordion-content w3-animate-left">
+                    <a href="/examples/charts/Pie/Basic.jsf" class="w3-border-bottom test w3-hover-red">Pie Basic</a>
+                </div>
+            </div>
+
+
+
+            <a href="#" class="w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
+            <a href="#" class="w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a><br /><br />
+
+
+
+        </nav>
+
+
+        <!-- Overlay effect when opening sidenav on small screens -->
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main w3-padding" style="margin-left:300px;margin-top:44px; ">
+            <h1>ISMJEE - Line Chart</h1>
+            <script type="text/javascript" src="/examples/highcharts/highcharts.js"></script>
+            <script type="text/javascript" src="/examples/highcharts/modules/exporting.js"></script>
+            
+            <div id="PieDiv" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <script>var options={chart:{renderTo:'PieDiv',type:'pie',plotBackgroundColor:null,plotBorderWidth:null,plotShadow:false},title:{align: 'center',floating:false,margin:15,style:{"color":"#333333","fontSize":"18px"},text:'Browser market shares January, 2015 to May, 2015',useHTML:false,widthAdjust:-44},subtitle:{align: 'center',floating:false,style:{"color":"#666666"},text:'subTitle',useHTML:false,widthAdjust:-44},tooltip:{pointFormat:'{series.name}: <b>{point.percentage:.1f}%</b>'},series:[{name:'Brands',data: [56.33,24.03,10.38,4.77,0.91,0.2]}]};var chart_PieDiv = new Highcharts.Chart(options);</script>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <script>
+            // Get the Sidenav
+            var mySidenav = document.getElementById("mySidenav");
+
+            // Get the DIV with overlay effect
+            var overlayBg = document.getElementById("myOverlay");
+
+            // Toggle between showing and hiding the sidenav, and add overlay effect
+            function w3_open() {
+                if (mySidenav.style.display === 'block') {
+                    mySidenav.style.display = 'none';
+                    overlayBg.style.display = "none";
+                } else {
+                    mySidenav.style.display = 'block';
+                    overlayBg.style.display = "block";
+                }
+            }
+
+            // Close the sidenav with the close button
+            function w3_close() {
+                mySidenav.style.display = "none";
+                overlayBg.style.display = "none";
+            }
+            function myFunc(id) {
+                var x = document.getElementById(id);
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                    x.previousElementSibling.className += " w3-red";
+                } else {
+                    x.className = x.className.replace(" w3-show", "");
+                    x.previousElementSibling.className =
+                            x.previousElementSibling.className.replace(" w3-red", "");
+                }
+            }
+
+
+        </script></body>
+</html>
