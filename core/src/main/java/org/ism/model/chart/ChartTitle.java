@@ -107,33 +107,33 @@ public class ChartTitle {
      */
     private Boolean unused = true;
 
-    /**
-     * *
-     *
-     * @return
+    /***
+     * <h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
+     * 
+     * @return unused to know if change was made
      */
     public boolean isUnused() {
         return unused;
     }
 
-    /**
-     * ************************************************************************
-     *
-     * ************************************************************************
-     */
+
     public ChartTitle(String title) {
         this.text = title;
+        unused = false;
     }
 
     public ChartTitle(String title, String style) {
         this.text = title;
         this.style = style;
+        unused = false;
     }
 
     public ChartTitle(String title, Integer x, Integer y) {
         this.text = title;
         this.x = x;
         this.y = y;
+        unused = false;
     }
 
     public ChartTitle(String title, String style, Integer x, Integer y) {
@@ -141,11 +141,13 @@ public class ChartTitle {
         this.style = style;
         this.x = x;
         this.y = y;
+        unused = false;
     }
 
     public ChartTitle(String title, Boolean isHTML) {
         this.text = title;
         this.useHTML = isHTML;
+        unused = false;
     }
 
     public ChartTitle(String title, Boolean isHTML, Integer x, Integer y) {
@@ -153,13 +155,10 @@ public class ChartTitle {
         this.useHTML = isHTML;
         this.x = x;
         this.y = y;
+        unused = false;
     }
 
-    /**
-     * ************************************************************************
-     *
-     * ************************************************************************
-     */
+
     public Align getAlign() {
         return align;
     }

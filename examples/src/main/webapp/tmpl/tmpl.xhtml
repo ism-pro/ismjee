@@ -9,9 +9,12 @@
         <title>ismjee</title>
 
         <h:outputStylesheet name="w3/w3.min.css" library="css"/>
+        <!--
         <h:outputStylesheet name="w3/font-awesome.min.css" library="css"/>
+        -->
+        
         <h:outputStylesheet name="style.min.css" library="css"/>
-
+        <h:outputStylesheet name="global.min.css" library="css"/>
     </h:head>
 
 
@@ -43,14 +46,15 @@
             </div>
 
 
-            <a href="#{request.contextPath}/home.jsf" class="w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Acceuil</a>
+            <a href="#{request.contextPath}/home.xhtml" class="w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Acceuil</a>
 
 
             <div class="w3-accordion">
                 <a id="myBtnLineChart" class="w3-padding" onclick="myFunc('chartLineSub')" 
                    href="javascript:void(0)"><i class="fa fa-chain fa-fw"></i>&nbsp; Line Chart<i class="w3-padding fa fa-caret-down"></i></a>
                 <div id="chartLineSub" class="w3-accordion-content w3-animate-left">
-                    <a href="#{request.contextPath}/charts/Line/Basic.jsf" class="w3-border-bottom test w3-hover-red">#{msgs.LineChartsBasic}</a>
+                    <h:link outcome="/charts/Line/Basic.xhtml" value="#{msgs.LineChartsBasic}" class="w3-border-bottom test w3-hover-red" />
+                    <a href="/faces/charts/Line/Basic.xhtml" class="w3-border-bottom test w3-hover-red">#{msgs.LineChartsBasic}</a>
                     <a href="javascript:void(0)" class="w3-padding w3-border-bottom test w3-hover-red">#{msgs.LineChartsAjax}</a>
                     <a href="javascript:void(0)" class="w3-padding w3-border-bottom test w3-hover-red">#{msgs.LineChartsLabel}</a>
                     <a href="javascript:void(0)" class="w3-padding w3-border-bottom test w3-hover-red">#{msgs.LineChartsTime}</a>
@@ -61,7 +65,7 @@
                 <a id="myBtnPieChart" class="w3-padding" onclick="myFunc('chartPieSub')" 
                    href="javascript:void(0)"><i class="fa fa-chain fa-fw"></i>&nbsp; Pie Chart<i class="w3-padding fa fa-caret-down"></i></a>
                 <div id="chartPieSub" class="w3-accordion-content w3-animate-left">
-                    <a href="#{request.contextPath}/charts/Pie/Basic.jsf" class="w3-border-bottom test w3-hover-red">#{msgs.PieChartsBasic}</a>
+                    <h:link outcome="/charts/Pie/Basic.xhtml" value="#{msgs.PieChartsBasic}" class="w3-border-bottom test w3-hover-red" />
                 </div>
             </div>
 

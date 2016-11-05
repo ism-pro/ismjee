@@ -9,8 +9,6 @@ import java.util.List;
 import org.ism.model.chart.properties.DataLabels;
 import org.ism.model.chart.properties.Point;
 import org.ism.model.chart.properties.Zone;
-import org.ism.model.chart.type.TypeLine;
-import org.ism.model.chart.type.TypePie;
 
 /**
  * <h1>ChartPlotOptions</h1>
@@ -26,7 +24,6 @@ import org.ism.model.chart.type.TypePie;
  * that type, for example plotOptions.line. Next, options for one single series
  * are given in the series array.
  *
- * <hr />
  *
  * @author r.hendrick
  */
@@ -347,10 +344,11 @@ public class ChartPlotOptions {
      */
     private Boolean unused = true;
 
-    /**
-     * *
-     *
-     * @return
+    /***
+     * <h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
+     * 
+     * @return unused to know if change was made
      */
     public boolean isUnused() {
         return unused;

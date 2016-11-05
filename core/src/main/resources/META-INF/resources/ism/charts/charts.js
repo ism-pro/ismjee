@@ -4,32 +4,75 @@
  * and open the template in the editor.
  */
 
-var chart1 = new Highcharts.Chart({
-    chart: {
-        renderTo: 'ctFruit',
-        type: 'bar'
-    },
-    title: {
-        text: 'Fruit Consumption'
-    },
-    xAxis: {
-        categories: ['Apples', 'Bananas', 'Oranges']
-    },
-    yAxis: {
-        title: {
-            text: 'Fruit eaten'
+$(function () {
+    var processed_json = new Array();
+    $.getJSON('http://localhost:8080/charts_demo/data.json', function (data) {
+        // Populate series
+        for (i = 0; i < data.length; i++) {
+            processed_json.push([data[i].key, data[i].value]);
         }
-    },
-    series: [{
-            name: 'Jane',
-            data: [1, 0, 4]
-        }, {
-            name: 'John',
-            data: [5, 7, 3]
-        }]
+
+        // draw chart
+        $('#container').highcharts({
+            chart: {
+                type: "column"
+            },
+            title: {
+                text: "Student data"
+            },
+            xAxis: {
+                type: 'category',
+                allowDecimals: false,
+                title: {
+                    text: ""
+                }
+            },
+            yAxis: {
+                title: {
+                    text: "Scores"
+                }
+            },
+            series: [{
+                    name: 'Subjects',
+                    data: processed_json
+                }]
+        });
+    });
 });
 
 
+
+
+
+
+/*
+ 
+ var chart1 = new Highcharts.Chart({
+ chart: {
+ renderTo: 'ctFruit',
+ type: 'bar'
+ },
+ title: {
+ text: 'Fruit Consumption'
+ },
+ xAxis: {
+ categories: ['Apples', 'Bananas', 'Oranges']
+ },
+ yAxis: {
+ title: {
+ text: 'Fruit eaten'
+ }
+ },
+ series: [{
+ name: 'Jane',
+ data: [1, 0, 4]
+ }, {
+ name: 'John',
+ data: [5, 7, 3]
+ }]
+ });
+ 
+ */
 /*
  function renderChart(divId, chartType, chartTitle, chartData, categories) {
  var options = createOption(divId, chartType, chartTitle, categories);

@@ -11,7 +11,6 @@ package org.ism.model.chart.properties;
  * <h2>Description</h2>
  *
  *
- * <hr />
  *
  * @author r.hendrick
  */
@@ -255,10 +254,11 @@ public class DataLabels {
      */
     private Boolean unused = true;
 
-    /**
-     * *
-     *
-     * @return
+    /***
+     * <h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
+     * 
+     * @return unused to know if change was made
      */
     public boolean isUnused() {
         return unused;

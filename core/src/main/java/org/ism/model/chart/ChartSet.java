@@ -6,8 +6,7 @@
 package org.ism.model.chart;
 
 import org.ism.model.chart.properties.ChartType;
-import java.util.ArrayList;
-import java.util.List;
+import org.ism.model.chart.properties.ResetZoomButton;
 
 /**
  * Options regarding the chart area and plot area as well as general chart
@@ -30,7 +29,7 @@ public class ChartSet {
      *
      * True by default, false.
      */
-    private Boolean alignTricks = true;
+    private Boolean alignTricks = null;
     /**
      * *
      * Set the overall animation for all chart updating. Animation can be
@@ -51,7 +50,7 @@ public class ChartSet {
      * Updating with no animation, with a longer duration, with a jQuery UI
      * easing.
      */
-    private Boolean animation = true;
+    private Boolean animation = null;
 
     /**
      * The background color or gradient for the outer chart area. Defaults to
@@ -62,7 +61,7 @@ public class ChartSet {
      * In styled mode, the background is set with the .highcharts-background
      * class.
      */
-    private String backgroundColor = "#FFFFFF";
+    private String backgroundColor = null;
 
     /**
      * The color of the outer chart border. Defaults to #335cad. Try it:
@@ -71,14 +70,14 @@ public class ChartSet {
      *
      * In styled mode, the stroke is set with the .highcharts-background class.
      */
-    private String borderColor = "#335cad";
+    private String borderColor = null;
 
     /**
      * The corner radius of the outer chart border. Defaults to 0. Try it:
      *
      * 20px radius
      */
-    private Integer borderRadius = 0;
+    private Integer borderRadius = null;
 
     /**
      * The pixel width of the outer chart border. Defaults to 0. Try it:
@@ -87,13 +86,13 @@ public class ChartSet {
      *
      * In styled mode, the stroke is set with the .highcharts-background class.
      */
-    private Integer borderWidth = 0;
+    private Integer borderWidth = null;
 
     /**
      * A CSS class name to apply to the charts container div, allowing unique
      * CSS styling for each chart.
      */
-    private String className = "";
+    private String className = null;
 
     /**
      * In styled mode, this sets how many colors the class names should rotate
@@ -102,7 +101,7 @@ public class ChartSet {
      * equivalent in non-styled mode is to set colors using the colors setting.
      * Defaults to 10.
      */
-    private Integer colorCount = 10;
+    private Integer colorCount = null;
 
     /**
      * Deprecated
@@ -111,7 +110,7 @@ public class ChartSet {
      *
      * Bar
      */
-    private String defaultSeriesType = "line";
+    private String defaultSeriesType = null;
 
     /**
      * A text description of the chart.
@@ -137,7 +136,7 @@ public class ChartSet {
      *
      * 500px height
      */
-    private Integer height = 400;
+    private Integer height = null;
 
     /**
      * If true, the axes will scale to the remaining visible series once one
@@ -148,7 +147,7 @@ public class ChartSet {
      *
      * True by default false, true with stack
      */
-    private Boolean ignoreHiddenSeries = true;
+    private Boolean ignoreHiddenSeries = null;
 
     /**
      * Whether to invert the axes so that the x axis is vertical and y axis is
@@ -162,7 +161,7 @@ public class ChartSet {
      *
      * Inverted line
      */
-    private Boolean inverted = false;
+    private Boolean inverted = null;
 
     /**
      * The margin between the bottom outer edge of the chart and the plot area.
@@ -171,7 +170,7 @@ public class ChartSet {
      *
      * 100px bottom margin
      */
-    private Integer marginBottom = 0;
+    private Integer marginBottom = null;
 
     /**
      * The margin between the left outer edge of the chart and the plot area.
@@ -180,7 +179,7 @@ public class ChartSet {
      *
      * 150px left margin
      */
-    private Integer marginLeft = 0;
+    private Integer marginLeft = null;
 
     /**
      * The margin between the right outer edge of the chart and the plot area.
@@ -189,7 +188,7 @@ public class ChartSet {
      *
      * 100px right margin
      */
-    private Integer marginRight = 0;
+    private Integer marginRight = null;
 
     /**
      * The margin between the top outer edge of the chart and the plot area. Use
@@ -198,7 +197,7 @@ public class ChartSet {
      *
      * 100px top margin
      */
-    private Integer marginTop = 0;
+    private Integer marginTop = null;
 
     /**
      * Allows setting a key to switch between zooming and panning. Try it:
@@ -214,7 +213,7 @@ public class ChartSet {
      *
      * Zooming and panning
      */
-    private Boolean panning = false;
+    private Boolean panning = null;
 
     /**
      * Equivalent to zoomType, but for multitouch gestures only. By default, the
@@ -232,7 +231,7 @@ public class ChartSet {
      * In styled mode, the plot background is set with the
      * .highcharts-plot-background class.
      */
-    private String plotBackgroundCorlor = "";
+    private String plotBackgroundCorlor = null;
 
     /**
      * The URL for an image to use as the plot background. To set an image as
@@ -256,7 +255,7 @@ public class ChartSet {
      * In styled mode, a plot border stroke can be set with the
      * .highcharts-plot-border class.
      */
-    private String plotBorderColor = "#cccccc";
+    private String plotBorderColor = null;
 
     /**
      * The pixel width of the plot area border. Defaults to 0. Try it:
@@ -273,7 +272,7 @@ public class ChartSet {
      *
      * Plot shadow
      */
-    private Boolean plotShadow = false;
+    private Boolean plotShadow = null;
 
     /**
      * When true, cartesian charts like line, spline, area and column are
@@ -283,7 +282,7 @@ public class ChartSet {
      * Polar line, polar area, polar column, combined series types, spider
      * chart, wind rose.
      */
-    private Boolean polar = false;
+    private Boolean polar = null;
 
     /**
      * reflow: BooleanSince 2.1 Whether to reflow the chart to fit the width of
@@ -292,7 +291,7 @@ public class ChartSet {
      * Move the bar between the JavaScript frame and the Preview frame to see
      * the effect: True by default, false.
      */
-    private Boolean reflow = true;
+    private Boolean reflow = null;
 
     /**
      * The HTML element where the chart will be rendered. If it is a string, the
@@ -309,13 +308,19 @@ public class ChartSet {
     private String renderTo = null;
 
     /**
+     * The button that appears after a selection zoom, allowing the user to
+     * reset zoom.
+     */
+    private ResetZoomButton resetZoomButton  = null;
+
+    /**
      * The background color of the marker square when selecting (zooming in on)
      * an area of the chart. Defaults to rgba(51,92,173,0.25). See also:
      *
      * In styled mode, the selection marker fill is set with the
      * .highcharts-selection-marker class.
      */
-    private String selectionMarkerFill = "51,92,173,0.25";
+    private String selectionMarkerFill = null;
 
     /**
      * Whether to apply a drop shadow to the outer chart area. Requires that
@@ -325,7 +330,7 @@ public class ChartSet {
      *
      * Shadow
      */
-    private Boolean shadow = false;
+    private Boolean shadow = null;
 
     /**
      * Whether to show the axes initially. This only applies to empty charts
@@ -334,7 +339,7 @@ public class ChartSet {
      *
      * False by default, true
      */
-    private Boolean showAxes = false;
+    private Boolean showAxes = null;
 
     /**
      * The space between the bottom edge of the chart and the content (plot
@@ -344,7 +349,7 @@ public class ChartSet {
      *
      * Spacing bottom set to 100.
      */
-    private Integer spacingBottom = 15;
+    private Integer spacingBottom = null;
 
     /**
      * The space between the left edge of the chart and the content (plot area,
@@ -354,7 +359,7 @@ public class ChartSet {
      *
      * Spacing left set to 100
      */
-    private Integer spacingLeft = 10;
+    private Integer spacingLeft = null;
 
     /**
      * The space between the right edge of the chart and the content (plot area,
@@ -364,7 +369,7 @@ public class ChartSet {
      *
      * Spacing set to 100, legend in right position with default spacing
      */
-    private Integer spacingRight = 10;
+    private Integer spacingRight = null;
 
     /**
      * The space between the top edge of the chart and the content (plot area,
@@ -375,7 +380,7 @@ public class ChartSet {
      * A top spacing of 100, floating chart title makes the plot area align to
      * the default spacingTop of 10..
      */
-    private Integer spacingTop = 10;
+    private Integer spacingTop = null;
 
     /**
      * Additional CSS styles to apply inline to the container div. Note that
@@ -389,7 +394,7 @@ public class ChartSet {
      * In styled mode, general chart styles can be set with the .highcharts-root
      * class.
      */
-    private String style = "{\"fontFamily\":\"\\\"Lucida Grande\\\", \\\"Lucida Sans Unicode\\\", Verdana, Arial, Helvetica, sans-serif\",\"fontSize\":\"12px\"}";
+    private String style = null;
 
     /**
      * The default series type for the chart. Can be any of the chart types
@@ -397,7 +402,7 @@ public class ChartSet {
      *
      * Bar
      */
-    private ChartType type = ChartType.LINE; //!< The default series type for the chart. Can be any of the chart types listed under plotOptions. Defaults to line.
+    private ChartType type = null;
 
     /**
      * A text description of the chart type.
@@ -431,9 +436,7 @@ public class ChartSet {
      *
      * panKey
      */
-    private String zommType = "xy";
-
- 
+    private String zommType = null;
 
     /**
      * Boolean used to determine if when of the setter method was used that way,
@@ -442,19 +445,17 @@ public class ChartSet {
     private Boolean unused = true;
 
     /**
-     * *
      *
-     * @return
+     * <
+     * h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
+     *
+     * @return unused to know if change was made
      */
     public boolean isUnused() {
         return unused;
     }
 
-    /**
-     * ************************************************************************
-     *
-     * ************************************************************************
-     */
     public Boolean getAlignTricks() {
         return alignTricks;
     }
@@ -815,5 +816,16 @@ public class ChartSet {
         unused = type != null;
     }
 
+    public ResetZoomButton getResetZoomButton() {
+        if(resetZoomButton==null){  resetZoomButton = new ResetZoomButton(); }
+        return resetZoomButton;
+    }
 
+    public void setResetZoomButton(ResetZoomButton resetZoomButton) {
+        getResetZoomButton();
+        this.resetZoomButton = resetZoomButton;
+        unused = resetZoomButton != null;
+    }
+
+    
 }

@@ -38,12 +38,6 @@
 
     <dependencies>
         
-        <dependency>
-            <groupId>javax.json</groupId>
-            <artifactId>javax.json-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-        
         <!-- compile -->
         <dependency>
             <groupId>commons-logging</groupId>
@@ -282,4 +276,5 @@
             </build>
         </profile>
     </profiles>
+    <version>16.10.20</version>
 </project>

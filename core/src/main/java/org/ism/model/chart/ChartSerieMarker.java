@@ -5,6 +5,11 @@
  */
 package org.ism.model.chart;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author r.hendrick
@@ -68,6 +73,8 @@ public class ChartSerieMarker {
      * Predefined, graphic and custom markers
      */
     private String symbol = null;
+    
+    public List<String> symbols = Arrays.asList("circle","square", "diamond", "triangle", "triangle-down");
     /**
      * Image markers only. Set the image width explicitly. When using this
      * option, a height must also be set. Defaults to null. Try it:
@@ -76,17 +83,31 @@ public class ChartSerieMarker {
      */
     private Integer width = null;
 
-    
-    
-    
-    
-    
+    /**
+     * Boolean used to determine if when of the setter method was used that way,
+     * we know if a parameter has to be write down
+     */
+    private Boolean unused = true;
+
+    /**
+     *
+     * <
+     * h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
+     *
+     * @return unused to know if change was made
+     */
+    public boolean isUnused() {
+        return unused;
+    }
+
     public Boolean getEnable() {
         return enable;
     }
 
     public void setEnable(Boolean enable) {
         this.enable = enable;
+        unused = enable != null;
     }
 
     public String getFillColor() {
@@ -95,6 +116,7 @@ public class ChartSerieMarker {
 
     public void setFillColor(String fillColor) {
         this.fillColor = fillColor;
+        unused = fillColor != null;
     }
 
     public Integer getHeight() {
@@ -103,6 +125,7 @@ public class ChartSerieMarker {
 
     public void setHeight(Integer height) {
         this.height = height;
+        unused = height != null;
     }
 
     public String getLineColor() {
@@ -111,6 +134,7 @@ public class ChartSerieMarker {
 
     public void setLineColor(String lineColor) {
         this.lineColor = lineColor;
+        unused = lineColor != null;
     }
 
     public Integer getLineWidth() {
@@ -119,6 +143,7 @@ public class ChartSerieMarker {
 
     public void setLineWidth(Integer lineWidth) {
         this.lineWidth = lineWidth;
+        unused = lineWidth != null;
     }
 
     public Integer getRadius() {
@@ -127,6 +152,7 @@ public class ChartSerieMarker {
 
     public void setRadius(Integer radius) {
         this.radius = radius;
+        unused = radius != null;
     }
 
     public String getSymbol() {
@@ -135,6 +161,11 @@ public class ChartSerieMarker {
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+        unused = symbol != null;
+    }
+
+    public List<String> getSymbols() {
+        return symbols;
     }
 
     public Integer getWidth() {
@@ -143,10 +174,7 @@ public class ChartSerieMarker {
 
     public void setWidth(Integer width) {
         this.width = width;
+        unused = width != null;
     }
-    
-    
-    
-    
-    
+
 }

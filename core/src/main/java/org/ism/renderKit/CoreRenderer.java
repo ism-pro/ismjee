@@ -23,7 +23,6 @@ import org.apache.myfaces.shared.renderkit.html.HtmlRenderer;
  * <h2>Description</h2>
  * HtmlRenderer is a base class for all Renderers that output HTML markup.
  *
- * <hr />
  *
  * @author r.hendrick
  */
@@ -58,6 +57,7 @@ public class CoreRenderer extends Renderer {
      *
      * @throws IOException if an I/O error occurs during rendering
      */
+    @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         // write out resources
         encodeResources(context, component);
@@ -68,6 +68,7 @@ public class CoreRenderer extends Renderer {
      *
      * @param context the Faces context
      * @param component the Faces component
+     * @throws java.io.IOException the exception
      */
     protected void encodeResources(FacesContext context, UIComponent component) throws IOException {
         // empty hook for subclasses to override as needed

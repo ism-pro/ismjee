@@ -99,7 +99,7 @@ public class PieBasic extends AbstractJsfTestCase {
         String output = writer.getWriter().toString();
         System.out.println(output);
         
-        assertEquals(null, output);
+        //assertEquals(null, output);
         assertNotSame(null, output);
         
     }

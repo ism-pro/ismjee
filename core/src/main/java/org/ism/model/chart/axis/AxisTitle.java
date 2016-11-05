@@ -92,18 +92,16 @@ public class AxisTitle {
     
     
     /***
+     * <h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
      * 
-     * @return 
+     * @return unused to know if change was made
      */
     public boolean isUnused() {
         return unused;
     }
     
-    /***
-     * Getter and setter
-     * @return 
-     */
-    
+
     public String getAlign() {
         return align;
     }

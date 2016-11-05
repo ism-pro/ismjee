@@ -5,8 +5,6 @@
  */
 package org.ism.model.chart.properties;
 
-import java.awt.geom.Area;
-
 /**
  *
  * @author r.hendrick
@@ -41,9 +39,9 @@ public enum ChartType {
     }
 
     /**
-     *
-     * @param type
-     * @return
+     * Convert Type
+     * @param type type in string
+     * @return the type in ChartTYpe
      */
     static public ChartType convert(String type) {
         switch (type) {

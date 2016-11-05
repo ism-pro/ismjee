@@ -6383,7 +6383,7 @@
             },
 
             credits: {
-                enabled: true,
+                enabled: false,
                 href: 'http://www.highcharts.com',
                 position: {
                     align: 'right',

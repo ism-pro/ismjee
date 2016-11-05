@@ -171,17 +171,18 @@ public class ChartSerieData {
 
     public ChartSerieData(List<Double> ys) {
        this.ys = ys;
-        unused = false;
+       unused = false;
     }
 
     
     
     
     
-    /**
-     * *
-     *
-     * @return
+    /***
+     * <h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
+     * 
+     * @return unused to know if change was made
      */
     public boolean isUnused() {
         return unused;
@@ -269,10 +270,12 @@ public class ChartSerieData {
     }
 
     public ChartSerieMarker getMarker() {
+        if(marker==null){   marker = new ChartSerieMarker();    }
         return marker;
     }
 
     public void setMarker(ChartSerieMarker marker) {
+        this.getMarker();
         this.marker = marker;
         unused = marker != null;
     }

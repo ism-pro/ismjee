@@ -6,14 +6,19 @@
 package org.ism.model.chart;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.ism.model.chart.properties.ChartType;
 import org.ism.model.chart.properties.DashStyle;
 import org.ism.model.chart.properties.Point;
 
 /**
+ * series<line>
+ * A line series. If the type option is not specified, it is inherited from
+ * chart.type.
+ *
+ * For options that apply to multiple series, it is recommended to add them to
+ * the pointOptions.series options structure. To apply to all series of this
+ * specific type, apply it to plotOptions.line.
  *
  * @author r.hendrick
  */
@@ -90,6 +95,29 @@ public class ChartSerie {
     private Integer borderWidth = null;
 
     /**
+     * className: StringSince 5.0.0 A class name to apply to the series'
+     * graphical elements.
+     */
+    private String className = null;
+
+    /**
+     * color: Color The main color or the series. In line type series it applies
+     * to the line and the point markers unless otherwise specified. In bar type
+     * series it applies to the bars unless a color is specified per point. The
+     * default value is pulled from the options.colors array.
+     *
+     * In styled mode, the series color can be set with the .highcharts-series,
+     * .highcharts-color-{n}, .highcharts-{type}-series or
+     * .highcharts-series-{n} class, or individual classes given by the
+     * className option.
+     *
+     * Try it:
+     *
+     * General plot option, one specific series, area color
+     */
+    private String color = null;
+
+    /**
      * center: Array<String|Number>
      * The center of the pie chart relative to the plot area. Can be percentages
      * or pixel values. The default behaviour (as of 3.0) is to center the pie
@@ -102,11 +130,6 @@ public class ChartSerie {
      * Centered at 100, 100
      */
     private Point center = null;
-
-    /**
-     * A class name to apply to the series' graphical elements.
-     */
-    private String className = null;
 
     /**
      * colors: Array<Color>Since 3.0 A series specific or series type specific
@@ -180,6 +203,17 @@ public class ChartSerie {
     private DashStyle dashStyle = null;
 
     /**
+     * marker Options for the point markers of line-like series. Properties like
+     * fillColor, lineColor and lineWidth define the visual appearance of the
+     * markers. Other series types, like column series, don't have markers, but
+     * have visual options on the series level instead.
+     *
+     * In styled mode, the markers can be styled with the .highcharts-point,
+     * .highcharts-point-hover and .highcharts-point-select class names.
+     */
+    private ChartSerieMarker marker = null;
+
+    /**
      * The name of the point as shown in the legend, tooltip, dataLabel etc.
      *
      * If the xAxis.type is set to category, and no categories option exists,
@@ -208,24 +242,26 @@ public class ChartSerie {
     }
 
     /**
+     * The serie name
      *
-     * @param serieName
+     * @param serieName name of serie
      */
     public ChartSerie(String serieName) {
         this.name = serieName;
     }
 
     /**
-     * *
      *
-     * @return
+     * <
+     * h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
+     *
+     * @return unused to know if change was made
      */
     public boolean isUnused() {
         return unused;
     }
 
-   
-    
     public String getName() {
         return name;
     }
@@ -363,10 +399,31 @@ public class ChartSerie {
 
     public void add(ChartSerieData chartSerieData) {
         if (datas == null) {
-            datas = new ArrayList<ChartSerieData>();
+            datas = new ArrayList<>();
         }
         datas.add(chartSerieData);
         unused = chartSerieData != null;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+        unused = color != null;
+    }
+
+    public ChartSerieMarker getMarker() {
+        if(marker==null)    marker = new ChartSerieMarker();
+        return marker;
+    }
+
+    public void setMarker(ChartSerieMarker marker) {
+        this.getMarker();
+        this.marker = marker;
+        unused = marker != null;
+    }
+  
+    
 }

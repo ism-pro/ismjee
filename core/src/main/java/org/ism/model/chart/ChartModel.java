@@ -27,57 +27,20 @@ public class ChartModel {
     private ChartToolTip tooltip = null;
     private ChartLegend legend = null;
     private ChartPlotOptions plotOptions = null;
-    private List<ChartSerie> series = new ArrayList<ChartSerie>();
+    private List<ChartSerie> series = new ArrayList<>();
+    private ChartSerieMarker marker = null;
     private XAxis xAxis = null;
     private YAxis yAxis = null;
 
     /**
      * Allow to add new serie to
      *
-     * @param serie
+     * @param serie Serie to display
      */
     public void addSerie(ChartSerie serie) {
         series.add(serie);
     }
 
-    /**
-     * <h3>renderChartSet</h3>
-     *
-     * @return
-     */
-    public String renderChartSet() {
-        String strChartSet = "";
-        if (!chart.isUnused()) {
-            return strChartSet;
-        }
-
-        strChartSet = ",chart:{";
-        if (chart.getRenderTo() != null) {
-            strChartSet += "renderTo:'" + chart.getRenderTo() + "',";
-        }
-        if (chart.getType() != null) {
-            strChartSet += "type:'" + chart.getType().toString() + "',";
-        }
-        if (chart.getPlotBackgroundCorlor() == null) {
-            strChartSet += "plotBackgroundColor:null,";
-        } else if (!chart.getPlotBackgroundCorlor().isEmpty()) {
-            strChartSet += "plotBackgroundColor:'" + chart.getPlotBackgroundCorlor() + "',";
-        }
-        if (chart.getPlotBorderWidth() == null) {
-            strChartSet += "plotBorderWidth:null,";
-        } else if (chart.getPlotBorderWidth() != 0) {
-            strChartSet += "plotBorderWidth:" + chart.getPlotBorderWidth().toString() + ",";
-        }
-        if (chart.getPlotShadow() != null) {
-            strChartSet += "plotShadow:" + chart.getPlotShadow().toString() + ",";
-        }
-        // Remove last ","
-        strChartSet = strChartSet.substring(0, strChartSet.length() - 1);
-        // close
-        strChartSet += "}";
-
-        return strChartSet;
-    }
 
     /**
      * <h3>renderTitle</h3>
@@ -85,7 +48,7 @@ public class ChartModel {
      * Allow to convert Title object to highchart formated Note start with
      * ",Title"
      *
-     * @return
+     * @return mapped for encoded script
      */
     public String renderTitle() {
         String strTitle = "";
@@ -142,7 +105,7 @@ public class ChartModel {
      * Allow to convert Title object to highchart formated Note start with
      * ",subtitle"
      *
-     * @return
+     * @return mapped for encoded script
      */
     public String renderSubTitle() {
         String strSubTitle = "";
@@ -198,7 +161,7 @@ public class ChartModel {
      *
      * Allow to convert xAxis to highchart formated Note start with ,xAxis: ...
      *
-     * @return
+     * @return mapped for encoded script
      */
     public String renderXAxis() {
         String strAxis = "";
@@ -209,25 +172,68 @@ public class ChartModel {
             return "";
         }
 
-        if (xAxis.getCategories().isEmpty()) {
-            return strAxis;
+        strAxis = ",xAxis:{";
+        Boolean isNotFirst = false;
+        if (!xAxis.getTitle().isUnused()) {
+            String strColor = "color:\'#666666\'";
+            strAxis += "title:{";
+            if (!xAxis.getTitle().getAlign().matches(AxisTitle.HIGH)) {
+                strAxis += "align:'" + xAxis.getTitle().getAlign() + "',";
+            }
+            if (xAxis.getTitle().getMargin() != null) {
+                strAxis += "margin:" + xAxis.getTitle().getMargin().toString() + ",";
+            }
+            if (xAxis.getTitle().getOffset() != null) {
+                strAxis += "offset:" + xAxis.getTitle().getOffset().toString() + ",";
+            }
+            if (xAxis.getTitle().getRotation() != null) {
+                strAxis += "rotation:" + xAxis.getTitle().getRotation().toString() + ",";
+            }
+            if (!xAxis.getTitle().getStyle().matches(strColor)) {
+                strAxis += "style:'" + xAxis.getTitle().getStyle() + "',";
+            }
+            if (xAxis.getTitle().getText() != null) {
+                strAxis += "text:'" + xAxis.getTitle().getText() + "',";
+            }
+            if (xAxis.getTitle().getX() != null) {
+                strAxis += "x:" + xAxis.getTitle().getX().toString() + ",";
+            }
+            if (xAxis.getTitle().getY() != null) {
+                strAxis += "y:" + xAxis.getTitle().getY().toString() + ",";
+            }
+            if (strAxis.length() > 1) {
+                strAxis = strAxis.substring(0, strAxis.length() - 1);
+                // Close 
+                strAxis += "}";
+            }
+            isNotFirst = true;
         }
-
-        strAxis = ",xAxis:{"
-                + "categories:[";
-        for (int i = 0; i < xAxis.getCategories().size(); i++) {
-            if (i != 0) {
+        if(xAxis.getType()!=null){
+            if(isNotFirst)  strAxis +=",";
+            strAxis += "type:'" + xAxis.getType().toString() + "'";
+        }
+        if (!xAxis.getCategories().isEmpty()) {
+            if(!xAxis.getTitle().isUnused()){
                 strAxis += ",";
             }
-            strAxis += "'" + xAxis.getCategories().get(i) + "'";
+            strAxis += "categories:[";
+            for (int i = 0; i < xAxis.getCategories().size(); i++) {
+                strAxis += "'" + xAxis.getCategories().get(i) + "',";
+            }
+            if (strAxis.length() > 1) {
+                strAxis = strAxis.substring(0, strAxis.length() - 1);
+                // Close 
+                strAxis += "]";
+            }
         }
-        strAxis += "]}";
+        strAxis += "}";
         return strAxis;
     }
 
     /**
+     * Renderer for YAxis
      *
-     * @return
+     * @return mapped for encoded script
      */
     public String renderYAxis() {
         if (yAxis == null) {
@@ -373,13 +379,13 @@ public class ChartModel {
 
         strPlotOptions = ",plotOptions:{";
         strPlotOptions += chart.getType().toString() + ":{";
-        if (plotOptions.getAllowPointSelect()!= null) {
+        if (plotOptions.getAllowPointSelect() != null) {
             strPlotOptions += "allowPointSelect:" + plotOptions.getAllowPointSelect().toString() + ",";
         }
-        if (plotOptions.getCursor()!= null) {
+        if (plotOptions.getCursor() != null) {
             strPlotOptions += "cursor:'" + plotOptions.getCursor() + "',";
         }
-        if (plotOptions.getDataLabels()!= null) {
+        if (plotOptions.getDataLabels() != null) {
             strPlotOptions += renderPlotOptionsDataLabels(plotOptions.getDataLabels());
         }
         // Remove last ","
@@ -390,15 +396,15 @@ public class ChartModel {
 
         return strPlotOptions;
     }
-    
-        /**
+
+    /**
      * <h3>renderPlotOptionsDataLabels</h3>
      *
      * Render the renderPlotOptionsDataLabels fonction . actualy manage only a
      *
      * @return script for render
      */
-    private String renderPlotOptionsDataLabels(DataLabels dataLabels){
+    private String renderPlotOptionsDataLabels(DataLabels dataLabels) {
         String strDataLabels = "";
         if (dataLabels == null) {
             return strDataLabels;
@@ -406,15 +412,15 @@ public class ChartModel {
         if (!dataLabels.isUnused()) {
             return strDataLabels;
         }
-        
+
         strDataLabels = "dataLabels:{";
-        if (dataLabels.getEnabled()!= null) {
+        if (dataLabels.getEnabled() != null) {
             strDataLabels += "enabled:" + dataLabels.getEnabled().toString() + ",";
         }
-        if (dataLabels.getFormat()!= null) {
+        if (dataLabels.getFormat() != null) {
             strDataLabels += "format:'" + dataLabels.getFormat() + "',";
         }
-        if (dataLabels.getStyle()!= null) {
+        if (dataLabels.getStyle() != null) {
             strDataLabels += "style:{" + dataLabels.getStyle() + "},";
         }
         strDataLabels = strDataLabels.substring(0, strDataLabels.length() - 1);
@@ -466,7 +472,7 @@ public class ChartModel {
      * Allow to convert serie to highchart formated. Note starte with ,serie:
      * ...
      *
-     * @return
+     * @return mapped for encoded script
      */
     public String renderSerie() {
         String strSeries = "";
@@ -477,7 +483,6 @@ public class ChartModel {
         List<ChartSerie> series = this.getSeries();
 
         Iterator<ChartSerie> itrSerie = series.iterator();
-        Boolean firstSerie = true;
         strSeries += ",series:[";
         while (itrSerie.hasNext()) {
             ChartSerie serie = itrSerie.next();
@@ -488,6 +493,40 @@ public class ChartModel {
             if (serie.getColorByPoint() != null) {
                 strSeries += "colorByPoint:" + serie.getColorByPoint().toString() + ",";
             }
+            //
+            // MANAGE MARKER
+            if (serie.getMarker().isUnused()) {
+                strSeries += "marker:{";
+                if (serie.getMarker().getEnable() != null) {
+                    strSeries += "enabled:" + serie.getMarker().getEnable().toString() + ",";
+                }
+                if (serie.getMarker().getFillColor() != null) {
+                    strSeries += "fillColor:\"" + serie.getMarker().getFillColor() + "\",";
+                }
+                if (serie.getMarker().getHeight() != null) {
+                    strSeries += "height:" + serie.getMarker().getHeight().toString() + ",";
+                }
+                if (serie.getMarker().getLineColor() != null) {
+                    strSeries += "lineColor:\"" + serie.getMarker().getLineColor() + "\",";
+                }
+                if (serie.getMarker().getLineWidth() != null) {
+                    strSeries += "lineWidth:" + serie.getMarker().getLineWidth().toString() + ",";
+                }
+                if (serie.getMarker().getRadius() != null) {
+                    strSeries += "radius:" + serie.getMarker().getRadius().toString() + ",";
+                }
+                if (serie.getMarker().getSymbol() != null) {
+                    strSeries += "symbol:'" + serie.getMarker().getSymbol() + "',";
+                }
+                if (serie.getMarker().getWidth() != null) {
+                    strSeries += "width:" + serie.getMarker().getWidth().toString() + ",";
+                }
+                strSeries = strSeries.substring(0, strSeries.length() - 1);
+                strSeries += "},";
+            }
+
+            //
+            // Manage DATA
             if (serie.getDatas() != null) {
                 strSeries += "data:[";
                 // Insertion de donnée
@@ -547,7 +586,7 @@ public class ChartModel {
      * Allow to convert serie to highchart formated. Note starte with ,serie:
      * ...
      *
-     * @return
+     * @return mapped for encoded script
      */
     public String renderSerieOrg() {
         String strSeries = "";
@@ -592,7 +631,41 @@ public class ChartModel {
         return strSeries;
     }
 
+    /**
+     * Affect the marker of model to a serie name
+     *
+     * @param serieName
+     */
+    public void markerApplyTo(String serieName) {
+        for (int i = 0; i < series.size(); i++) {
+            if (series.get(i) != null) {
+                if (series.get(i).getName() != null && serieName != null) {
+                    if (series.get(i).getName().matches(serieName)) {
+                        series.get(i).setMarker(marker);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Affect the marker of model to all series
+     *
+     */
+    public void markerApply() {
+        for (int i = 0; i < series.size(); i++) {
+            if (series.get(i) != null) {
+                if (series.get(i).getName() != null) {
+                    series.get(i).setMarker(marker);
+                }
+            }
+        }
+    }
+
     public ChartSet getChart() {
+        if (chart == null) {
+            chart = new ChartSet();
+        }
         return chart;
     }
 
@@ -691,4 +764,27 @@ public class ChartModel {
     public void setSeries(List<ChartSerie> series) {
         this.series = series;
     }
+
+    /**
+     * General marker not apply to any series. Need to use method markerApplyTo
+     * to set marker to a serie, or markerApply to set marker to ll series
+     *
+     * @return marker
+     */
+    public ChartSerieMarker getMarker() {
+        if (marker == null) {
+            marker = new ChartSerieMarker();
+        }
+        return marker;
+    }
+
+    /**
+     * Affect marekr by new value
+     *
+     * @param marker
+     */
+    public void setMarker(ChartSerieMarker marker) {
+        this.marker = marker;
+    }
+
 }

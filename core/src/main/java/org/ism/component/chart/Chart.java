@@ -32,35 +32,29 @@ import javax.faces.event.BehaviorEvent;
 import javax.faces.event.FacesEvent;
 import org.apache.myfaces.buildtools.maven2.plugin.builder.annotation.JSFComponent;
 import org.apache.myfaces.buildtools.maven2.plugin.builder.annotation.JSFProperty;
-//import org.primefaces.event.ItemSelectEvent;
 
-
-@ResourceDependencies({
-    // JQuery
-    @ResourceDependency(library = "jquery", name = "jquery-2.2.3.min.js")
-    /*@ResourceDependency(library = "highcharts", name = "css/highcharts.css"),
+@ResourceDependencies({ // JQuery
+/*@ResourceDependency(library = "jquery", name = "jquery-2.2.3.min.js")*/ /*@ResourceDependency(library = "highcharts", name = "css/highcharts.css"),
     @ResourceDependency(library = "highcharts", name = "highcharts.js"),
     @ResourceDependency(library = "highcharts", name = "modules/exporting.js"),
     
     @ResourceDependency(library = "ism", name = "charts/charts.min.css"),
-    @ResourceDependency(library = "ism", name = "charts/charts.min.js")*/
-})
+    @ResourceDependency(library = "ism", name = "charts/charts.min.js")*/})
 
 @JSFComponent(
         name = "ism:chart",
         clazz = "org.ism.component.chart.Chart",
         tagClass = "org.ism.component.chart.ChartTag")
-public class Chart extends UIComponentBase implements  javax.faces.component.behavior.ClientBehaviorHolder {
+public class Chart extends UIComponentBase implements javax.faces.component.behavior.ClientBehaviorHolder {
 
     public static final String COMPONENT_TYPE = "org.ism.component.Chart";
     public static final String COMPONENT_FAMILY = "org.ism.component";
     private static final String DEFAULT_RENDERER = "org.ism.component.ChartRenderer";
     public static final String DEFAULT_RENDERER_TYPE = "org.ism.component.ChartRenderer";
 
-    
     protected enum PropertyKeys {
 
-        widgetVar, type, model, style, styleClass, responsive, exporting;
+        widgetVar, type, model, style, styleClass, responsive, exporting, debug;
 
         String toString;
 
@@ -71,6 +65,7 @@ public class Chart extends UIComponentBase implements  javax.faces.component.beh
         PropertyKeys() {
         }
 
+        @Override
         public String toString() {
             return ((this.toString != null) ? this.toString : super.toString());
         }
@@ -80,6 +75,7 @@ public class Chart extends UIComponentBase implements  javax.faces.component.beh
         setRendererType(DEFAULT_RENDERER);
     }
 
+    @Override
     public String getFamily() {
         return COMPONENT_FAMILY;
     }
@@ -89,16 +85,41 @@ public class Chart extends UIComponentBase implements  javax.faces.component.beh
         return (java.lang.String) getStateHelper().eval(PropertyKeys.widgetVar, null);
     }
 
+    /**
+     * Deprecated : not working
+     *
+     * @param _widgetVar is the primefaces
+     */
     @JSFProperty
     public void setWidgetVar(java.lang.String _widgetVar) {
         getStateHelper().put(PropertyKeys.widgetVar, _widgetVar);
     }
 
+    /**
+     * <h3>Description</h3>
+     * Type allow to specify kind of chart to be render. Type is one of Line,
+     * Pie,
+     *
+     * <h3>Note :</h3>
+     * Defining this properety have priority on model type chart.
+     *
+     * @return type
+     */
     @JSFProperty
     public java.lang.String getType() {
         return (java.lang.String) getStateHelper().eval(PropertyKeys.type, null);
     }
 
+    /**
+     * <h3>Description</h3>
+     * Type allow to specify kind of chart to be render. Type is one of Line,
+     * Pie,
+     *
+     * <h3>Note :</h3>
+     * Defining this properety have priority on model type chart.
+     *
+     * @param _type is one of line, pie,
+     */
     @JSFProperty
     public void setType(java.lang.String _type) {
         getStateHelper().put(PropertyKeys.type, _type);
@@ -143,17 +164,38 @@ public class Chart extends UIComponentBase implements  javax.faces.component.beh
     public void setResponsive(boolean _responsive) {
         getStateHelper().put(PropertyKeys.responsive, _responsive);
     }
-    
+
     @JSFProperty
-    public boolean isExporting(){
+    public boolean isExporting() {
         return (java.lang.Boolean) getStateHelper().eval(PropertyKeys.exporting, false);
     }
-    
+
     @JSFProperty
     public void setExporting(boolean _exporting) {
         getStateHelper().put(PropertyKeys.exporting, _exporting);
     }
-    
+
+    /**
+     * When enable this property allow to display the render mecanisme for the
+     * chart to render.
+     *
+     * @return true if debug macanisme is activated
+     */
+    @JSFProperty
+    public boolean isDebug() {
+        return (java.lang.Boolean) getStateHelper().eval(PropertyKeys.debug, false);
+    }
+
+    /**
+     * When enable this property allow to display the render mecanisme for the
+     * chart to render.
+     *
+     * @param _debug true for renderer
+     */
+    @JSFProperty
+    public void setDebug(boolean _debug) {
+        getStateHelper().put(PropertyKeys.debug, _debug);
+    }
 
     private final static String DEFAULT_EVENT = "itemSelect";
 
@@ -178,7 +220,6 @@ public class Chart extends UIComponentBase implements  javax.faces.component.beh
             int seriesIndex = Integer.parseInt(map.get("seriesIndex"));
 
             //ItemSelectEvent itemSelectEvent = new ItemSelectEvent(this, behaviorEvent.getBehavior(), itemIndex, seriesIndex);
-
             //super.queueEvent(itemSelectEvent);
         }
     }

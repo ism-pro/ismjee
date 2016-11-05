@@ -35,12 +35,17 @@
             <renderer-type>org.ism.component.ChartRenderer</renderer-type>
         </component>
         <attribute>
-           <description><![CDATA[]]></description>
+           <description><![CDATA[Deprecated : not working]]></description>
            <name>widgetVar</name>
            <type>java.lang.String</type>
         </attribute>
         <attribute>
-           <description><![CDATA[]]></description>
+           <description><![CDATA[<h3>Description</h3>
+Type allow to specify kind of chart to be render. Type is one of Line,
+Pie,
+
+<h3>Note :</h3>
+Defining this properety have priority on model type chart.]]></description>
            <name>type</name>
            <type>java.lang.String</type>
         </attribute>
@@ -67,6 +72,12 @@
         <attribute>
            <description><![CDATA[]]></description>
            <name>exporting</name>
+           <type>boolean</type>
+        </attribute>
+        <attribute>
+           <description><![CDATA[When enable this property allow to display the render mecanisme for the
+chart to render.]]></description>
+           <name>debug</name>
            <type>boolean</type>
         </attribute>
         <attribute>

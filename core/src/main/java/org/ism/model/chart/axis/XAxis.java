@@ -13,7 +13,7 @@ import java.util.List;
  * the chart is inverted this is the vertical axis. In case of multiple axes,
  * the xAxis node is an array of configuration objects.
  *
- * @See the Axis object for programmatic access to the axis.
+ * See the Axis object for programmatic access to the axis.
  *
  * @author r.hendrick
  */
@@ -32,9 +32,10 @@ public class XAxis {
      */
     private Boolean allowDecimals = null;
 
+
     /**
      * <h3>categories</h3>
-     * 
+     *
      * If categories are present for the xAxis, names are used instead of
      * numbers for that axis. Since Highcharts 3.0, categories can also be
      * extracted by giving each point a name and setting axis type to category.
@@ -49,34 +50,49 @@ public class XAxis {
      */
     List<String> categories = null;
 
+    
+    
+    /**
+     * Titre de l'axe
+     */
+    private AxisTitle title = null;
+    
+    /**
+     * type: String The type of axis. Can be one of linear, logarithmic,
+     * datetime or category. In a datetime axis, the numbers are given in
+     * milliseconds, and tick marks are placed on appropriate values like full
+     * hours or days. In a category axis, the point names of the chart's series
+     * are used for categories, if not a categories array is defined. Defaults
+     * to linear. Try it:
+     *
+     * "linear", "datetime" with regular intervals, "datetime" with irregular
+     * intervals, "logarithmic", "logarithmic" with minor grid lines,
+     * "logarithmic" on two axes.
+     */
+    private AxisType type = null;
+    
+    
     /**
      * Boolean used to determine if when of the setter method was used that way,
      * we know if a parameter has to be write down
      */
     private Boolean unused = true;
-    
-    /***
-     * 
-     * @return 
+
+
+    /**
+     *
+     * <
+     * h1>isUnused</h1>
+     * Standard method to describe if class was used by set or get method
+     *
+     * @return unused to know if change was made
      */
     public boolean isUnused() {
         return unused;
     }
-    
-    /**
-     * <h3>addCategorie</h3>
-     * 
-     * This allow to fullfill xAxis label
-     * 
-     * @param categorie 
-     */
-    public void addCategorie(String categorie){
-        if(categorie==null){    unused = categorie != null; return; }
-        if(categories==null)    categories = new ArrayList<String>();
-        categories.add(categorie);
-        unused = categorie != null;
-    }   
-    
+
+
+
     public Boolean getAllowDecimals() {
         return allowDecimals;
     }
@@ -86,6 +102,25 @@ public class XAxis {
         unused = allowDecimals != null;
     }
 
+        /**
+     * <h3>addCategorie</h3>
+     *
+     * This allow to fullfill xAxis label
+     *
+     * @param categorie the categorie
+     */
+    public void addCategorie(String categorie) {
+        if (categorie == null) {
+            unused = categorie != null;
+            return;
+        }
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
+        categories.add(categorie);
+        unused = categorie != null;
+    }
+    
     public List<String> getCategories() {
         return categories;
     }
@@ -94,9 +129,29 @@ public class XAxis {
         this.categories = categories;
         unused = categories != null;
     }
+    
+    public AxisTitle getTitle() {
+        if (title == null) {
+            title = new AxisTitle();
+        }
+        return title;
+    }
+
+    public void setTitle(AxisTitle title) {
+        getTitle();
+        this.title = title;
+        unused = title != null;
+    }
+
+    public AxisType getType() {
+        return type;
+    }
+
+    public void setType(AxisType type) {
+        this.type = type;
+        unused = categories != null;
+    }
 
     
-    
-    
-    
+
 }

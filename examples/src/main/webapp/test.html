@@ -66,12 +66,19 @@
         <!-- !PAGE CONTENT! -->
         <div class="w3-main w3-padding" style="margin-left:300px;margin-top:44px; ">
             <h1>ISMJEE - Line Chart</h1>
-            <script type="text/javascript" src="/examples/highcharts/highcharts.js"></script>
-            <script type="text/javascript" src="/examples/highcharts/modules/exporting.js"></script>
+            <script type="text/javascript" src="/examples/faces/highcharts/highcharts.js"></script>
+            <div id="j_idt64:chartSession" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <script>
+                var options={
+                    chart:{plotBackgrounColor:null,plotBorderWidth:null,renderTo:'bodyForm:j_idt61:statisticsChart',type:'line'},
+                    title:{text:'AER-001 - EAU BRUTE',x:-20},
+                    subtitle:{style:{"color":"#666666"},text:'[PH - MESURE DE PH]',x:-20},
+                    xAxis:{title:{text:'Date Echantillonage'},categories:['06-oct.-2016','04-oct.-2016','07-oct.-2016','10-oct.-2016','12-oct.-2016','13-oct.-2016','14-oct.-2016','17-oct.-2016','18-oct.-2016','19-oct.-2016','20-oct.-2016','21-oct.-2016','24-oct.-2016','25-oct.-2016','26-oct.-2016']},yAxis:{title:{text:'Potentiel Ion Hydrogène'}},tooltip:{valueSuffix:'pH'},series:[{name:'PH - MESURE DE PH',marker:{lineColor:"#ffffff",lineWidth:0,radius:4},data:[6.59,6.53,6.6,6.85,6.53,6.53,6.63,6.48,6.42,6.56,6.51,6.55,6.53,6.55,6.64]},{name:'AalimitHH',marker:{lineColor:"#ffffff",lineWidth:0,radius:4},data:[8.5,8.5,8.5,8.5,8.5,8.5,8.5,8.5,8.5,8.5,8.5,8.5,8.5,8.5,8.5]},{name:'AalimitH',marker:{lineColor:"#ffffff",lineWidth:0,radius:4},data:[7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0]},{name:'AalimitB',marker:{lineColor:"#ffffff",lineWidth:0,radius:4},data:[6.0,6.0,6.0,6.0,6.0,6.0,6.0,6.0,6.0,6.0,6.0,6.0,6.0,6.0,6.0]},{name:'AalimitBB',marker:{lineColor:"#ffffff",lineWidth:0,radius:4},data:[4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0]}]};
+                var chart_bodyForm_j_idt61_statisticsChart = new Highcharts.Chart(options);
+            </script>
             
-            <div id="PieDiv" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-            <script>var options={chart:{renderTo:'PieDiv',type:'pie',plotBackgroundColor:null,plotBorderWidth:null,plotShadow:false},title:{align: 'center',floating:false,margin:15,style:{"color":"#333333","fontSize":"18px"},text:'Browser market shares January, 2015 to May, 2015',useHTML:false,widthAdjust:-44},subtitle:{align: 'center',floating:false,style:{"color":"#666666"},text:'subTitle',useHTML:false,widthAdjust:-44},tooltip:{pointFormat:'{series.name}: <b>{point.percentage:.1f}%</b>'},series:[{name:'Brands',data: [56.33,24.03,10.38,4.77,0.91,0.2]}]};var chart_PieDiv = new Highcharts.Chart(options);</script>
-
+            
+            
         </div>
 
 

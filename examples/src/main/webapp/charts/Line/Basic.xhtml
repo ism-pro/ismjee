@@ -1,20 +1,184 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ism="http://www.ism.org/ismjee">
+      xmlns:ism="http://www.ism.org/ismjee"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      lang="fr" xml:lang="fr">
 
 
     <ui:composition template="/tmpl/tmpl.xhtml">
         <ui:define name="body">
             <h1>ISMJEE - Line Chart</h1>
-            
+
             <ism:chart id="lineMap" 
-                      style="min-width: 310px; height: 400px; margin: 0 auto"
-                      model="#{lineBasic.model}"
-                      exporting="true"
-                      />
+                       style="min-width: 310px; height: 400px; margin: 0 auto"
+                       model="#{lineBasic.model}"
+                       exporting="true"
+                       />
+            <hr />
+            <h2 style="margin-top:0">Paramétrages</h2>
+            <h:form id="bodyForm">
+                <p:accordionPanel id="accordion">
+                    <p:tab id="tabChartSet" title="ChartSet - HightChart : chart" >
+                        <p:panelGrid columns="2" 
+                                     columnClasses="columnFieldClass, columnContentClass" 
+                                     styleClass="panelGridClass"
+                                     style="margin:0px;"
+                                     >
+
+                            <p:outputLabel value="AlignTicks" for="alignTicks" />
+                            <p:selectOneButton id="alignTicks" >
+                                <f:selectItem itemLabel="#{msgs.Yes}" itemValue="true" />
+                                <f:selectItem itemLabel="#{msgs.No}" itemValue="false" />
+                                <f:selectItem itemLabel="#{msgs.Null}" itemValue="null" />
+                            </p:selectOneButton>
+
+                            <p:outputLabel value="Animation" for="animation" />
+                            <p:selectOneButton id="animation" >
+                                <f:selectItem itemLabel="#{msgs.Yes}" itemValue="true" />
+                                <f:selectItem itemLabel="#{msgs.No}" itemValue="false" />
+                                <f:selectItem itemLabel="#{msgs.Null}" itemValue="null" />
+                            </p:selectOneButton>
+
+                            <p:outputLabel value="Background Color" for="backgroundColor" />
+                            <p:colorPicker id="backgroundColor" 
+                                           />
+
+                            <p:outputLabel value="Border Color" for="borderColor" />
+                            <p:colorPicker id="borderColor" 
+                                           />
+
+                            <p:outputLabel value="Border Radius" for="borderRadius" />
+                            <p:inputNumber id="borderRadius"
+                                           />
+
+                            <p:outputLabel value="Border Width" for="borderWidth" />
+                            <p:inputNumber id="borderWidth"
+                                           />
+
+                            <p:outputLabel value="Class Name" for="className" />
+                            <p:inputText id="className"
+                                         />
+
+                            <p:outputLabel value="Color count" for="colorCount" />
+                            <p:inputNumber id="colorCount"
+                                           />
+
+                            <p:outputLabel value="Description" for="description" />
+                            <p:inputText id="description"
+                                         />
+
+                            <p:outputLabel value="Plot Background Color" for="plotBackgroundColor" />
+                            <h:panelGroup >
+                                <p:selectBooleanCheckbox id="plotBackgroundColorEnable"
+                                                         />
+                                <br/>
+                                <p:colorPicker id="plotBackgroundColor"
+                                               />
+                            </h:panelGroup>
+
+                            <p:outputLabel value="Plot Border Width" for="plotBorderWidth" />
+                            <h:panelGroup >
+                                <p:selectBooleanCheckbox id="plotBorderWidthEnable"
+                                            />
+                                <br/>
+                                <p:colorPicker id="plotBorderWidth"
+                                               />
+                            </h:panelGroup>
+
+                            <p:outputLabel value="Plot Shadow" for="plotShadow" />
+                            <p:selectBooleanCheckbox id="plotShadow"
+                                        />
+
+
+
+
+                        </p:panelGrid>
+
+                    </p:tab>
+
+                    <p:tab id="tabChartSerieMarker" title="ChartSerieMarker - HightChart : marker">
+                        <p:panelGrid columns="2" 
+                                     columnClasses="columnFieldClass, columnContentClass" 
+                                     styleClass="panelGridClass"
+                                     style="margin:0px;"
+                                     >
+                            <h:outputLabel for="SerieName"
+                                           value="#{msgs.SerieName}" />
+                            <h:inputText id="SerieName"
+                                         value="#{lineBasic.serieName}"
+                                         />
+
+                            <h:outputLabel for="SerieMarkerEnable"
+                                           value="#{msgs.Activate}" />
+                            <h:selectBooleanCheckbox id="SerieMarkerEnable"
+                                                     value="#{lineBasic.model.marker.enable}"
+                                                     />
+
+                            <h:outputLabel for="SerieMarkerWidth"
+                                           value="Largeur du marqueur" />
+                            <h:inputText id="SerieMarkerWidth"
+                                         value="#{lineBasic.model.marker.width}"
+                                         />
+
+                            <h:outputLabel for="SerieMarkerHeight"
+                                           value="Hauteur du marqueur" />
+                            <h:inputText id="SerieMarkerHeight"
+                                         value="#{lineBasic.model.marker.height}"
+                                         />
+
+                            <h:outputLabel for="SerieMarkerRadius"
+                                           value="Rayons marqueur" />
+                            <h:inputText id="SerieMarkerRadius"
+                                         value="#{lineBasic.model.marker.radius}"
+                                         />
+
+                            <h:outputLabel for="SerieMarkerLineWidth"
+                                           value="Epaisseur de ligne" />
+                            <h:inputText id="SerieMarkerLineWidth"
+                                         value="#{lineBasic.model.marker.lineWidth}"
+                                         />
+
+                            <h:outputLabel for="SerieMarkerLineColor"
+                                           value="Couleur de ligne" />
+                            <h:inputText id="SerieMarkerLineColor"
+                                         value="#{lineBasic.model.marker.lineColor}"
+                                         />
+
+                            <h:outputLabel for="SerieMarkerSymbol"
+                                           value="Symbole de ligne" />
+                            <h:selectOneMenu id="SerieMarkerSymbol"
+                                             value="#{lineBasic.model.marker.symbol}"
+
+                                             >
+                                <f:selectItems value="#{lineBasic.model.marker.symbols}" 
+                                               />
+                            </h:selectOneMenu>
+                        </p:panelGrid>                        
+                    </p:tab>
+                    <p:tab title="Godfather Part III">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputText value="After a break of more than 15 years..." />
+                        </h:panelGrid>
+                    </p:tab>
+                </p:accordionPanel>
+                <br />
+                <p:commandButton value="#{msgs.Apply}"
+                                 actionListener="#{lineBasic.handlerMarkerApplyTo()}"
+                                 update="lineMap"
+                                 />
+                <p:commandButton value="#{msgs.ApplyOnAll}"
+                                 actionListener="#{lineBasic.handlerMarkerApply()}"
+                                 />
+            </h:form>
+
+
+
+
+
         </ui:define>
     </ui:composition>
 
